@@ -7,8 +7,8 @@ services:
       volumes:
         - ./solr/managed-schema:/opt/solr/server/solr/configsets/basic_configs/conf/managed-schema:ro
         - ./solr/solrconfig.xml:/opt/solr/server/solr/configsets/basic_configs/conf/solrconfig:ro
-      command: solr-create -c nutch #-d /tmp/nutch_core_config
-      ports: #El puerto no es necesario para comunicación, pero sí para acceder a la interfaz web http://localhost:8983/solr/
+      command: solr-create -c nutch
+      ports:
          - 8983:8983
 
    nutch:
