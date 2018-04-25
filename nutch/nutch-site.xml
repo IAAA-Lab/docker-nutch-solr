@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+
+	<property>
+		<name>http.agent.name</name>
+		<value>Ahab Captain</value> #elegid cada uno un valor diferente
+	</property>
+	<property>
+		<name>http.content.limit</name>
+		<value>-1</value>
+	</property>
+	<property>
+		<name>db.max.outlinks.per.page</name>
+		<value>-1</value>
+	</property>
+	<property>
+		<name>fetcher.server.delay</name>
+		<value>0.1</value>
+	</property>
+
+</configuration>

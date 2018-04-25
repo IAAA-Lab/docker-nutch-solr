@@ -1,13 +1,15 @@
 version: '3'
 
 services:
-   solr_service:
-      build: ./solr_build
-      ports:
+   solr:
+      image: solr:6.6.0@sha256:e8f279c9ab594525ab0344c0cb44d5f2a2e308bec3e14a11648095af15cad90b
+      container_name: solr
+      ports: #El puerto no es necesario para comunicación, pero sí para acceder a la interfaz web http://localhost:8983/solr/
          - 8983:8983
-   nutch_service:
-      build: ./nutch_build
       stdin_open: true 
+   nutch:
+      image: apache/nutch:release-1.13@sha256:270a933f2311f7f8b4d477139d72fcb95eec284903642c6515c279aafaa09e66
+      container_name: nutch
       tty: true
       depends_on:
          - solr_service
