@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+   solr_service:
+      build: ./solr_build
+      ports:
+         - 8983:8983
+   nutch_service:
+      build: ./nutch_build
+      stdin_open: true 
+      tty: true
+      depends_on:
+         - solr_service
