@@ -8,18 +8,46 @@
 	<property>
 		<name>http.agent.name</name>
 		<value>Ahab Captain</value> #elegid cada uno un valor diferente
+		<description>HTTP 'User-Agent' request header. MUST NOT be empty -
+		  please set this to a single word uniquely related to your organization.
+		  NOTE: You should also check other related properties:
+		    http.robots.agents
+		    http.agent.description
+		    http.agent.url
+		    http.agent.email
+		    http.agent.version
+		  and set their values appropriately.
+		</description>
 	</property>
+
 	<property>
 		<name>http.content.limit</name>
 		<value>-1</value>
+		<description>
+			The length limit for downloaded content using the http://
+		  protocol, in bytes. If this value is nonnegative (>=0), content longer
+		  than it will be truncated; otherwise, no truncation at all. Do not
+		  confuse this setting with the file.content.limit setting.
+		</description>
 	</property>
+
 	<property>
 		<name>db.max.outlinks.per.page</name>
 		<value>-1</value>
+		<description>The maximum number of outlinks that we'll process for a page.
+			If this value is nonnegative (>=0), at most db.max.outlinks.per.page outlinks
+			will be processed for a page; otherwise, all outlinks will be processed.
+		</description>
 	</property>
+
 	<property>
 		<name>fetcher.server.delay</name>
 		<value>0.1</value>
+	  <description>The number of seconds the fetcher will delay between
+			successive requests to the same server. Note that this might get
+			overridden by a Crawl-Delay from a robots.txt and is used ONLY if
+			fetcher.threads.per.queue is set to 1.
+		</description>
 	</property>
 
 </configuration>
