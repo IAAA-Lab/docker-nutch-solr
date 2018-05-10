@@ -1,15 +1,25 @@
-version: '3'
+version: '2'
 
 services:
-   solr:
-      image: solr:6.6.0@sha256:e8f279c9ab594525ab0344c0cb44d5f2a2e308bec3e14a11648095af15cad90b
-      container_name: solr
+   elasticsearch:
+      image: docker.elastic.co/elasticsearch/elasticsearch:5.3.0@sha256:56ac964338bc74f3874d63271433f6555648d55405a89c96f56a18dee48456eb
+      container_name: elasticsearch
+      environment:
+        cluster.name: elasticsearch
+        bootstrap.memory_lock: "true"
+        xpack.security.enabled: "false"
+        ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      ulimits:
+        memlock:
+          soft: -1
+          hard: -1
+      mem_limit: 1g
       volumes:
-        - ./solr/managed-schema:/opt/solr/server/solr/configsets/basic_configs/conf/managed-schema:ro
-        - ./solr/solrconfig.xml:/opt/solr/server/solr/configsets/basic_configs/conf/solrconfig:ro
-      command: solr-create -c nutch
+        - elastic-data:/usr/share/elasticsearch/data
+      networks:
+        - cluster
       ports:
-         - 8983:8983
+        - 9200:9200
 
    nutch:
       image: apache/nutch:release-1.13@sha256:270a933f2311f7f8b4d477139d72fcb95eec284903642c6515c279aafaa09e66
@@ -24,4 +34,14 @@ services:
       tty: true
       # command: /root/nutch/bin/crawl -i -D solr.server.url=http://solr:8983/solr/nutch /root/nutch/urls/seed.txt TestCrawl 2 #Ejecuta el crawling automáticamente
       depends_on:
-         - solr
+         - elasticsearch
+      networks:
+       - cluster
+
+volumes:
+  elastic-data:
+    driver: local
+
+networks:
+  cluster:
+    driver: bridge
