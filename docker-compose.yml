@@ -33,6 +33,18 @@ services:
     networks:
       - cluster
 
+  searchkit:
+    build:
+      context: ./searchkit
+    image: localhost:5000/searchkit:0.1
+    container_name: searchkit
+    depends_on:
+      - elasticsearch
+    networks:
+      - cluster
+    ports:
+      - 3000:3000
+
 volumes:
   elastic-data:
     driver: local

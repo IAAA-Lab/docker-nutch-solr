@@ -22,3 +22,10 @@ services:
       - ./nutch/seed.txt:/root/nutch/urls/seed.txt:ro
     tty: true
     command: bash
+
+  searchkit:
+    volumes:
+      - ./searchkit/src:/app/src:ro
+      - ./searchkit/public:/app/public:ro
+    ports:
+      - 35729:35729
