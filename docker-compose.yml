@@ -22,17 +22,12 @@ services:
         - 9200:9200
 
    nutch:
-      image: apache/nutch:release-1.13@sha256:270a933f2311f7f8b4d477139d72fcb95eec284903642c6515c279aafaa09e66
+      build:
+        context: ./nutch
+      image: localhost:5000/nutch:1.14-elasticsearch
       container_name: nutch
-      environment:
-        JAVA_HOME: /usr/lib/jvm/java-7-oracle/jre/
       volumes:
-        - ./nutch/nutch-site.xml:/root/nutch/conf/nutch-site.xml:ro
-        - ./nutch/regex-urlfilter.txt:/root/nutch/conf/regex-urlfilter.txt:ro
-        - ./nutch/seed.txt:/root/nutch/urls/seed.txt:ro
-      #IMPORTANTE: Existen dos modos de ejecución: `interactivo` (tty) o `servicio` (command). Mantener uno de los dos comentado
-      tty: true
-      # command: /root/nutch/bin/crawl -i -D solr.server.url=http://solr:8983/solr/nutch /root/nutch/urls/seed.txt TestCrawl 2 #Ejecuta el crawling automáticamente
+        - nutch-data:/root/nutch/data
       depends_on:
          - elasticsearch
       networks:
@@ -40,6 +35,8 @@ services:
 
 volumes:
   elastic-data:
+    driver: local
+  nutch-data:
     driver: local
 
 networks:
