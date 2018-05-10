@@ -9,6 +9,8 @@ services:
       memlock:
         soft: 65536
         hard: 65536
+    volumes:
+      - ./elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
     ports:
       - 9200:9200
       - 9300:9300
