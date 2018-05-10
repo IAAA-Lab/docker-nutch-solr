@@ -24,7 +24,7 @@ services:
   nutch:
     build:
       context: ./nutch
-    image: localhost:5000/nutch:1.14-elasticsearch
+    image: localhost:5000/nutch:elastic-5.3.0
     container_name: nutch
     volumes:
       - nutch-data:/root/nutch/data
