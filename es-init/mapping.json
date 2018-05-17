@@ -1,0 +1,73 @@
+{
+  "mappings": {
+    "doc": {
+      "properties": {
+
+        "host": {
+          "type": "keyword"
+        },
+
+        "url": {
+          "type": "keyword"
+        },
+
+        "content": {
+          "type": "text"
+        },
+
+        "text": {
+          "type": "text"
+        },
+
+        "title": {
+          "type": "text",
+          "fields" : {
+            "raw" : {
+              "type" : "keyword"
+            }
+          }
+        },
+
+        "anchor": {
+          "type": "text",
+          "fields" : {
+            "raw" : {
+              "type" : "keyword"
+            }
+          }
+        },
+
+        "type": {
+          "type": "keyword"
+        },
+
+        "contentLength": {
+          "type": ""
+        },
+
+        "lastModified": {
+          "type": "date",
+          "format": "yyyy-MM-dd'T'HH:mm:ssZ"
+        },
+
+        "date": {
+          "type": "date",
+          "format": "yyyy-MM-dd'T'HH:mm:ssZ"
+        },
+
+        "lang": {
+          "type": "keyword"
+        },
+
+        "cc": {
+          "type": "keyword"
+        },
+
+        "tld": {
+          "type": "keyword"
+        }
+
+      }
+    }
+  }
+}
