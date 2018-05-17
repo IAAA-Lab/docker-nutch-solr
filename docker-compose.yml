@@ -2,7 +2,7 @@ version: '2'
 
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:5.3.0@sha256:56ac964338bc74f3874d63271433f6555648d55405a89c96f56a18dee48456eb
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.3.0
     container_name: elasticsearch
     environment:
       cluster.name: elasticsearch
@@ -20,6 +20,18 @@ services:
       - cluster
     ports:
       - 9200:9200
+
+  es-init:
+    build:
+      context: ./es-init
+    image: localhost:5000/es-init:nutch
+    environment:
+      ES_HOST: elasticsearch
+      TIME_OUT: 120
+    depends_on:
+      - elasticsearch
+    networks:
+      - cluster
 
   nutch:
     build:

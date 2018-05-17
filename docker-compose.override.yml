@@ -14,6 +14,9 @@ services:
     ports:
       - 9200:9200
       - 9300:9300
+  es-init:
+    volumes:
+      - ./es-init/init-elastic:/app/init-elastic
 
   nutch:
     volumes:
