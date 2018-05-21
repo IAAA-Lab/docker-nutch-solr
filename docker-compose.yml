@@ -3,7 +3,6 @@ version: '2'
 services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:5.3.0
-    container_name: elasticsearch
     environment:
       cluster.name: elasticsearch
       bootstrap.memory_lock: "true"
@@ -25,9 +24,6 @@ services:
     build:
       context: ./es-init
     image: localhost:5000/es-init:nutch
-    environment:
-      ES_HOST: elasticsearch
-      TIME_OUT: 120
     depends_on:
       - elasticsearch
     networks:
@@ -37,7 +33,6 @@ services:
     build:
       context: ./nutch
     image: localhost:5000/nutch:elastic-5.3.0
-    container_name: nutch
     volumes:
       - nutch-data:/root/nutch/data
     depends_on:
@@ -49,7 +44,6 @@ services:
     build:
       context: ./searchkit
     image: localhost:5000/searchkit:0.1
-    container_name: searchkit
     depends_on:
       - elasticsearch
     networks:

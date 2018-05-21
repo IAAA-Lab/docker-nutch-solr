@@ -2,29 +2,27 @@ version: '2'
 
 services:
   elasticsearch:
-    environment:
-      bootstrap.memory_lock: "false"
-      ES_JAVA_OPTS: ""
-    ulimits:
-      memlock:
-        soft: 65536
-        hard: 65536
     volumes:
       - ./elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
     ports:
       - 9200:9200
       - 9300:9300
+
   es-init:
+    # command: "echo Skipped"
     volumes:
       - ./es-init/init-elastic:/app/init-elastic
+      - ./es-init/mapping.json:/app/mapping.json
 
   nutch:
     volumes:
       - ./nutch/nutch-site.xml:/root/nutch/conf/nutch-site.xml:ro
       - ./nutch/regex-urlfilter.txt:/root/nutch/conf/regex-urlfilter.txt:ro
       - ./nutch/seed.txt:/root/nutch/urls/seed.txt:ro
-    tty: true
-    command: bash
+    # tty: true
+    # command: bash
+    ports:
+      - 8080:8080
 
   searchkit:
     volumes:

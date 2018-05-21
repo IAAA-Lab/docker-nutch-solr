@@ -1,4 +1,4 @@
-## Mapping:
+len Mapping:
 
 Estos son los campos interesantes y los plug-ins que los generan.
 
@@ -39,7 +39,7 @@ Estos son los campos interesantes y los plug-ins que los generan.
 |field|type|indexed|multivalued|
 |-|-|-|-|
 | type | string | YES | YES |
-| contentLength | string | ||
+| contentLength | long | ||
 | lastModified | date | ||
 | date | tdate | YES ||
 
