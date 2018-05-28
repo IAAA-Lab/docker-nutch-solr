@@ -37,6 +37,24 @@
           }
         },
 
+        "description": {
+          "type": "text",
+          "fields" : {
+            "raw" : {
+              "type" : "keyword"
+            }
+          }
+        },
+
+        "keywords": {
+          "type": "text",
+          "fields" : {
+            "raw" : {
+              "type" : "keyword"
+            }
+          }
+        },
+
         "type": {
           "type": "keyword"
         },

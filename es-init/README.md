@@ -43,6 +43,12 @@ Estos son los campos interesantes y los plug-ins que los generan.
 | lastModified | date | ||
 | date | tdate | YES ||
 
+### `index-metadata`
+|field|type|indexed|multivalued|
+|-|-|-|-|
+| description | string | YES ||
+| keywords | string | YES | YES |
+
 ### `languageidentifier`
 |field|type|indexed|multivalued|
 |-|-|-|-|
