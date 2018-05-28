@@ -46,7 +46,7 @@ const MovieHitsListItem = (props)=> {
         <h5>Date: {source.date || "<no-date>"}</h5>
         <h5>Last Modified: {source.lastModified || "<no-las-modified>"}</h5>
         <h5>Content length: {source.contentLength || "<no-length>"}</h5>
-        <a href="{source.url || '#'}">{source.url || "<no-url>"}</a>
+        <a target="_blank" href={source.url || '#'}>{source.url || "<no-url>"}</a>
     </div>
     </div>
   )
