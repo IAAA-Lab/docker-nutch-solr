@@ -28,3 +28,8 @@ services:
       - ./searchkit/public:/app/public:ro
     ports:
       - 35729:35729
+      - 3000:3000
+
+  ingress:
+    volumes:
+      - ./ingress/nginx.conf:/etc/nginx/nginx.conf:ro

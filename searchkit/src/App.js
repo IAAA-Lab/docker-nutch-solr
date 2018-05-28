@@ -14,7 +14,7 @@ import { RefinementAutosuggest } from "@searchkit/refinement-autosuggest"
 import { SearchkitAutosuggest, FacetFilterDatasource, SuggestQuerySource } from "@searchkit/autosuggest"
 
 
-const host = "http://localhost:9200/nutch/doc"
+const host = "http://localhost/nutch/doc"
 const searchkit = new SearchkitManager(host)
 const docModel = ["boost","content","digest","host","id","segment","title","tstamp","url"]
 

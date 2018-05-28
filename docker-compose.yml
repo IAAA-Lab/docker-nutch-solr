@@ -16,9 +16,8 @@ services:
     volumes:
       - elastic-data:/usr/share/elasticsearch/data
     networks:
-      - cluster
-    ports:
-      - 9200:9200
+      - backend
+      - frontend
 
   es-init:
     build:
@@ -27,7 +26,7 @@ services:
     depends_on:
       - elasticsearch
     networks:
-      - cluster
+      - backend
 
   nutch:
     build:
@@ -36,9 +35,9 @@ services:
     volumes:
       - nutch-data:/root/nutch/data
     depends_on:
-      - elasticsearch
+      - es-init
     networks:
-      - cluster
+      - backend
 
   searchkit:
     build:
@@ -47,9 +46,18 @@ services:
     depends_on:
       - elasticsearch
     networks:
-      - cluster
+      - backend
+      - frontend
+
+  ingress:
+    image: nginx
+    depends_on:
+      - elasticsearch
+      - searchkit
+    networks:
+      - frontend
     ports:
-      - 3000:3000
+      - "80:80"
 
 volumes:
   elastic-data:
@@ -58,5 +66,7 @@ volumes:
     driver: local
 
 networks:
-  cluster:
+  backend:
+    driver: bridge
+  frontend:
     driver: bridge
