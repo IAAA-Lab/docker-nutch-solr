@@ -52,7 +52,7 @@
 
 	<property>
 	  <name>plugin.includes</name>
-	  <value>protocol-http|urlfilter-(regex|validator)|parse-(html|tika|metatags)|catch-all|languageidentifier|creativecommons|tld|index-(basic|anchor|more|metadata)|indexer-elastic|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
+	  <value>protocol-http|headings|urlfilter-(regex|validator)|parse-(html|tika|metatags|js|zip)|catch-all|languageidentifier|creativecommons|tld|index-(basic|anchor|more|metadata|links)|indexer-elastic|scoring-opic|urlnormalizer-(pass|regex|basic|querystring)</value>
 		<description>Regular expression naming plugin directory names to
 			include.  Any plugin not matching this expression is excluded.
 			In any case you need at least include the nutch-extensionpoints plugin. By
@@ -62,6 +62,22 @@
 			underlying commons-httpclient library. Set parsefilter-naivebayes for classification based focused crawler.
 		</description>
 	</property>
+
+	<property>
+	  <name>headings.multivalued</name>
+	  <value>true</value>
+	  <description>
+			Whether to support multivalued headings.
+		</description>
+	</property>
+
+	<property>
+	 <name>headings</name>
+	 <value>h1,h2</value>
+	 <description>
+		 Comma separated list of headings to retrieve from the document
+	 </description>
+ </property>
 
 	<property>
 	  <name>metatags.names</name>
