@@ -7,6 +7,10 @@
           "type": "keyword"
         },
 
+        "id": {
+          "type": "keyword"
+        },
+
         "url": {
           "type": "keyword"
         },
@@ -17,6 +21,10 @@
 
         "text": {
           "type": "text"
+        },
+
+        "boost": {
+          "type": "double"
         },
 
         "title": {
@@ -55,6 +63,22 @@
           }
         },
 
+        "outlinks": {
+          "type": "keyword"
+        },
+
+        "inlinks": {
+          "type": "keyword"
+        },
+
+        "h1": {
+          "type": "keyword"
+        },
+
+        "h2": {
+          "type": "keyword"
+        },
+
         "type": {
           "type": "keyword"
         },
@@ -71,6 +95,10 @@
           "type": "date"
         },
 
+        "tstamp": {
+          "type": "date"
+        },
+
         "lang": {
           "type": "keyword"
         },
@@ -79,8 +107,20 @@
           "type": "keyword"
         },
 
+        "cache": {
+          "type": "keyword"
+        },
+
         "tld": {
           "type": "keyword"
+        },
+
+        "digest": {
+          "enabled": false
+        },
+
+        "segment": {
+          "enabled": false
         }
 
       }
