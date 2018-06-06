@@ -49,6 +49,15 @@ services:
       - backend
       - frontend
 
+  kibana:
+    image: docker.elastic.co/kibana/kibana:5.3.3
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    networks:
+      - backend
+
   ingress:
     image: nginx
     depends_on:
