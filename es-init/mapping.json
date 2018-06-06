@@ -16,11 +16,13 @@
         },
 
         "content": {
-          "type": "text"
+          "type": "text",
+          "analyzer": "spanish"
         },
 
         "text": {
-          "type": "text"
+          "type": "text",
+          "analyzer": "spanish"
         },
 
         "boost": {
@@ -29,6 +31,7 @@
 
         "title": {
           "type": "text",
+          "analyzer": "spanish",
           "fields" : {
             "raw" : {
               "type" : "keyword"
@@ -38,6 +41,7 @@
 
         "anchor": {
           "type": "text",
+          "analyzer": "spanish",
           "fields" : {
             "raw" : {
               "type" : "keyword"
@@ -47,6 +51,7 @@
 
         "description": {
           "type": "text",
+          "analyzer": "spanish",
           "fields" : {
             "raw" : {
               "type" : "keyword"
@@ -56,6 +61,7 @@
 
         "keywords": {
           "type": "text",
+          "analyzer": "spanish",
           "fields" : {
             "raw" : {
               "type" : "keyword"
@@ -63,19 +69,21 @@
           }
         },
 
+        "h1": {
+          "type": "text",
+          "analyzer": "spanish"
+        },
+
+        "h2": {
+          "type": "text",
+          "analyzer": "spanish"
+        },
+
         "outlinks": {
           "type": "keyword"
         },
 
         "inlinks": {
-          "type": "keyword"
-        },
-
-        "h1": {
-          "type": "keyword"
-        },
-
-        "h2": {
           "type": "keyword"
         },
 
