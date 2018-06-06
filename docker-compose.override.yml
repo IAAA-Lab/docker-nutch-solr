@@ -17,6 +17,7 @@ services:
       - ./nutch/nutch-site.xml:/root/nutch/conf/nutch-site.xml:ro
       - ./nutch/regex-urlfilter.txt:/root/nutch/conf/regex-urlfilter.txt:ro
       - ./nutch/seed.txt:/root/nutch/urls/seed.txt:ro
+      - ./nutch/crawl:/root/nutch/bin/crawl:ro
     # tty: true
     # command: bash
     ports:

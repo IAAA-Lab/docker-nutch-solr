@@ -11,6 +11,7 @@ RUN mkdir /entrypoint && \
 
 COPY ./nutch-site.xml ./regex-urlfilter.txt /root/nutch/conf/
 COPY ./seed.txt /root/nutch/urls/seed.txt
+COPY ./crawl /root/nutch/bin/crawl
 
 ENV ES_HOST=elasticsearch \
     ES_PORT=9200 \
