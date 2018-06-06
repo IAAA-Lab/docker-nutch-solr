@@ -51,6 +51,47 @@
 	</property>
 
 	<property>
+	  <name>fetcher.server.min.delay</name>
+	  <value>0.1</value>
+	  <description>The minimum number of seconds the fetcher will delay between
+	  successive requests to the same server. This value is applicable ONLY
+	  if fetcher.threads.per.queue is greater than 1 (i.e. the host blocking
+	  is turned off).</description>
+	</property>
+
+	<property>
+	  <name>fetcher.timelimit.mins</name>
+	  <value>2</value>
+	  <description>This is the number of minutes allocated to the fetching.
+	  Once this value is reached, any remaining entry from the input URL list is skipped
+	  and all active queues are emptied. The default value of -1 deactivates the time limit.
+	  </description>
+	</property>
+
+	<property>
+	  <name>fetcher.threads.fetch</name>
+	  <value>50</value>
+	  <description>The number of FetcherThreads the fetcher should use.
+	  This is also determines the maximum number of requests that are
+	  made at once (each FetcherThread handles one connection). The total
+	  number of threads running in distributed mode will be the number of
+	  fetcher threads * number of nodes as fetcher has one map task per node.
+	  </description>
+	</property>
+
+	<property>
+	  <name>fetcher.threads.per.queue</name>
+	  <value>50</value>
+	  <description>This number is the maximum number of threads that
+	    should be allowed to access a queue at one time. Setting it to
+	    a value > 1 will cause the Crawl-Delay value from robots.txt to
+	    be ignored and the value of fetcher.server.min.delay to be used
+	    as a delay between successive requests to the same server instead
+	    of fetcher.server.delay.
+	   </description>
+	</property>
+
+	<property>
 	  <name>plugin.includes</name>
 	  <value>protocol-http|headings|urlfilter-(regex|validator)|parse-(html|tika|metatags|js|zip)|catch-all|languageidentifier|creativecommons|tld|index-(basic|anchor|more|metadata|links)|indexer-elastic|scoring-opic|urlnormalizer-(pass|regex|basic|querystring)</value>
 		<description>Regular expression naming plugin directory names to
