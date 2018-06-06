@@ -11,7 +11,9 @@
     "react-dom": "^16.0.0",
     "react-scripts": "1.1.4",
     "react-select": "^1.0.0-rc.10",
-    "searchkit": "^2.3.0-3"
+    "searchkit": "^2.3.0-3",
+    "semantic-ui-css": "^2.3.1",
+    "semantic-ui-react": "^0.81.1"
   },
   "scripts": {
     "start": "react-scripts start",

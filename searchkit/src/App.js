@@ -7,47 +7,58 @@ import { SearchkitManager,SearchkitProvider,
   Hits, ViewSwitcherToggle, DynamicRangeFilter,
   InputFilter, GroupedSelectedFilters, QueryAccessor,
   Layout, TopBar, LayoutBody, LayoutResults,
-  ActionBar, ActionBarRow, SideBar, TagFilterList} from 'searchkit'
-import './index.css'
+  ActionBar, ActionBarRow, SideBar, TagFilterList,TagFilter, TagFilterConfig, Panel} from 'searchkit'
 
 import { RefinementAutosuggest } from "@searchkit/refinement-autosuggest"
 import { SearchkitAutosuggest, FacetFilterDatasource, SuggestQuerySource } from "@searchkit/autosuggest"
 
+import {Label, Accordion} from 'semantic-ui-react'
 
-const host = "http://localhost/nutch/doc"
+
+const host = "/nutch/doc"
 const searchkit = new SearchkitManager(host)
 const docModel = ["boost","content","digest","host","id","segment","title","tstamp","url"]
 
-const InfoLiveView = (props) => {
-    if (props.fields !== undefined){
-        const object = props.fields;
-        const fields = Object.keys(object).map((key) =>
-            <li key={key}> <strong>{key}:</strong> {object[key]}</li>
-        );
+const text_fields=["content","text","title","anchor","description","keywords","h1","h2"]
+const available_colors = ['red','orange','yellow','olive','green','teal','blue','violet','purple','pink','brown','grey','black']
+const colors = {
+  pdf: available_colors[0],
+  application: available_colors[3],
+  "xhtml+xml": available_colors[6]
+}
 
-        return (
-          <ul>{fields}</ul>
-        )
-    } else {
-        return (<h5>No body info</h5>);
-    }
-};
-
-const MovieHitsListItem = (props)=> {
+const HitItem = (props)=> {
   const {bemBlocks, result} = props
   let url = "http://www.imdb.com/title/" + result._source.imdbId
   const source = extend({}, result._source, result.highlight)
   return (
-    <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
-    <div className={bemBlocks.item("details")}>
-        <h1>{source.title || "<No title>"}</h1>
-        <h3>Data types: <TagFilterList field="type.raw" values={source.type} /></h3>
-        <h3>Host: {source.host || "<no-host>"}</h3>
-        <h5>Date: {source.date || "<no-date>"}</h5>
-        <h5>Last Modified: {source.lastModified || "<no-las-modified>"}</h5>
-        <h5>Content length: {source.contentLength || "<no-length>"}</h5>
-        <a target="_blank" href={source.url || '#'}>{source.url || "<no-url>"}</a>
-    </div>
+    <div className={bemBlocks.item().mix(bemBlocks.container("item"))} key={result._id} data-qa="hit">
+      <div className={bemBlocks.item("details")}>
+          <a href={source.url || '#'} target="_blank"><h2 className={bemBlocks.item("title")}>
+            {source.title || source.h1 || source.h2 || "<No title>"}
+          </h2></a>
+          <h3 className={bemBlocks.item("subtitle")}>
+          Date: {source.date || "<no-date>"}, last
+          modified: {source.lastModified || "<no-las-modified>"}, content
+          length: {source.contentLength || "<no-length>"}
+          </h3>
+
+          <Accordion styled panels={[
+            { title: "Contenido de la página", content: { content: source.content,
+              key: "content"}},
+            { title: "Links salientes", content: { content: (
+                <ul> {source.outlinks.map( (e) => (<li><TagFilter field="outlinks" value={e} /></li>) )} </ul> ),
+              key: "outlinks"}}
+          ]}
+          />
+
+          <Label.Group size="medium">
+            {source.type.map((e) => (
+              <Label color={colors[e]} key={e}><TagFilter field="type" value={e}/></Label>
+            ))}
+          </Label.Group>
+
+      </div>
     </div>
   )
 }
@@ -63,13 +74,14 @@ class App extends Component {
                 autofocus={true}
                 queryHandler={
                   new QueryAccessor("q", {
-                    fields:["content","title","anchor"]
+                    fields: text_fields
                   })
                 }
                 sources={[
                   new SuggestQuerySource(),
                   new FacetFilterDatasource({accessorId:"title"}),
-                  new FacetFilterDatasource({ accessorId:"type"})
+                  new FacetFilterDatasource({accessorId:"keywords"}),
+                  new FacetFilterDatasource({accessorId:"type"})
                 ]}
             />
           </TopBar>
@@ -79,7 +91,9 @@ class App extends Component {
           <SideBar>
           <RefinementAutosuggest multi={true} operator="OR" id="type" title="Type" field="type" size={10}/>
           <RefinementAutosuggest operator="OR" id="title" title="Title" field="title.raw"/>
+          <RefinementAutosuggest operator="OR" id="keywords" title="Keywords" field="keywords.raw"/>
           <DynamicRangeFilter field="contentLength" id="contentLength" title="Size" rangeFormatter={(count)=> count}/>
+          <TagFilterConfig id="outlinks" title="Outlinks" field="outlinks" />
 
           </SideBar>
           <LayoutResults>
@@ -105,9 +119,9 @@ class App extends Component {
             </ActionBar>
             <Hits
                 hitsPerPage={12}
-                highlightFields={["url","content"]}
+                highlightFields={text_fields}
                 mod="sk-hits-list"
-                itemComponent={MovieHitsListItem}
+                itemComponent={HitItem}
             />
             <NoHits suggestionsField={"content"}/>
             <Pagination showNumbers={true}/>
