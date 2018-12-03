@@ -6,8 +6,8 @@ services:
       container_name: solr
       volumes:
         - ./solr/managed-schema:/opt/solr/server/solr/configsets/basic_configs/conf/managed-schema:ro
-        - ./solr/solrconfig.xml:/opt/solr/server/solr/configsets/basic_configs/conf/solrconfig:ro
-      command: solr-create -c nutch
+        - ./solr/solrconfig.xml:/opt/solr/server/solr/configsets/basic_configs/conf/solrconfig.xml:ro
+      command: solr-create -c nutch -d basic_configs
       ports:
          - 8983:8983
 
